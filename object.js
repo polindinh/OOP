@@ -34,8 +34,7 @@ $(document).ready(function(){
             success: function(data){
                 var newQuote = new KayneQuote(data.quote);
                 console.log(newQuote);
-                // newQuote.methodOne();
-                console.log(newQuote.methodOne());
+                newQuote.methodOne();
 
             }
         });
