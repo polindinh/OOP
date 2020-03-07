@@ -6,6 +6,9 @@ class KayneQuote {
 
     methodOne() {
         //DO SOMETHING WITH THE QUOTE
+        alert (this.kanyeWisdom);
+        // this.kanyeWisdom.quote = this.kanyeWisdom.quote.toUpperCase();
+
     }
 
     methodTwo() {
@@ -22,30 +25,19 @@ class KayneQuote {
 
 $(document).ready(function(){
     $("#clickMe").click(function(){
+        console.log('click');
         $.ajax({
             "url":"https://api.kanye.rest/",
             "data": {},
             "type":"GET",
             "dataType":"json",
-        }).done(
-            function(resultJson){
-                console.log(resultJson.quote);
-                $("#content").append("<p id='quote'>"+resultJson.quote+"</p>");
-                var colorChanger = $("#quote");
-                console.log(colorChanger);
-                colorChanger.on(
-            {
-                "mouseout":function(){colorChanger.css("color","green");},
-                "mouseover":function(){colorChanger.css("color","red");}
+            success: function(data){
+                var newQuote = new KayneQuote(data.quote);
+                console.log(newQuote);
+                // newQuote.methodOne();
+                console.log(newQuote.methodOne());
+
             }
-        );
-        }).fail(
-            function(xhr,status,error){
-            console.log("there was an error" + error);
-        }).always(
-            function(xhr, status){
-                alert("request complete");
-            }
-        );
+        });
     });
 });
