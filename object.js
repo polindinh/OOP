@@ -5,16 +5,17 @@ class KayneQuote {
     }
 
     methodOne() {
-        //DO SOMETHING WITH THE QUOTE
-        alert (this.kanyeWisdom);
-        // this.kanyeWisdom.quote = this.kanyeWisdom.quote.toUpperCase();
-
+        //turn the whole quote to upper case
+        var quote = this.kanyeWisdom.toUpperCase();
+        $("#content").html(quote);
     }
 
     methodTwo() {
-        //DO SOMETHING WITH THE QUOTE
-    }
-
+        //change every second letter to capital
+        var quote = this.kanyeWisdom.split('').map((letter, i) => i % 2 == 0 ? letter.toLowerCase() : letter.toUpperCase()).join('');
+        return  $("#content").html(quote);
+    
+          }
     methodThree() {
         //DO SOMETHING WITH THE QUOTE
     }
@@ -35,7 +36,40 @@ $(document).ready(function(){
                 var newQuote = new KayneQuote(data.quote);
                 console.log(newQuote);
                 newQuote.methodOne();
+            }
+        });
+    });
+});
 
+$(document).ready(function(){
+    $("#clickMe1").click(function(){
+        console.log('click');
+        $.ajax({
+            "url":"https://api.kanye.rest/",
+            "data": {},
+            "type":"GET",
+            "dataType":"json",
+            success: function(data){
+                var newQuote = new KayneQuote(data.quote);
+                console.log(newQuote);
+                newQuote.methodTwo();
+            }
+        });
+    });
+});
+
+$(document).ready(function(){
+    $("#clickMe2").click(function(){
+        console.log('click');
+        $.ajax({
+            "url":"https://api.kanye.rest/",
+            "data": {},
+            "type":"GET",
+            "dataType":"json",
+            success: function(data){
+                var newQuote = new KayneQuote(data.quote);
+                console.log(newQuote);
+                newQuote.methodThree();
             }
         });
     });
